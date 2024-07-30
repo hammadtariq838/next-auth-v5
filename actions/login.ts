@@ -11,8 +11,7 @@ import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
 import { generateVerificationToken } from '@/lib/tokens';
 
 export const login = async (
-  values: z.infer<typeof LoginSchema>,
-  callbackUrl?: string | null
+  values: z.infer<typeof LoginSchema>
 ) => {
   const validatedFields = LoginSchema.safeParse(values);
 
@@ -48,7 +47,7 @@ export const login = async (
     await signIn('credentials', {
       email,
       password,
-      redirectTo: callbackUrl || DEFAULT_LOGIN_REDIRECT,
+      redirectTo: DEFAULT_LOGIN_REDIRECT,
     });
   } catch (error) {
     if (error instanceof AuthError) {
